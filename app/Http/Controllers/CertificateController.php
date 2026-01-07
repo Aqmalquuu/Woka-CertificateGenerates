@@ -137,8 +137,14 @@ class CertificateController extends Controller
     public function show(Certificate $certificate)
     {
         return response()->file(
-            storage_path('app/public/' . str_replace('storage/', '', $certificate->pdf_path))
+            storage_path('app/public/' . $certificate->pdf_path),
+            [
+                'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+                'Pragma' => 'no-cache',
+                'Expires' => '0',
+            ]
         );
+
     }
 
     /**
@@ -162,11 +168,24 @@ class CertificateController extends Controller
     {
         $request->validate([
             'program_id' => 'required|exists:programs,id',
-            'template_id' => 'nullable|exists:certificate_templates,id',
+            'template_id' => 'required|exists:certificate_templates,id',
             'issued_date' => 'required|date',
             'status' => 'required|in:active,revoked',
         ]);
 
+        /* ================= UPDATE DATABASE ================= */
+        $certificate->update([
+            'program_id' => $request->program_id,
+            'template_id' => $request->template_id,
+            'issued_date' => $request->issued_date,
+            'status' => $request->status,
+        ]);
+
+        /* 🔥 PENTING: REFRESH OBJECT */
+        $certificate->refresh(); // AMBIL DATA TERBARU DARI DB
+        $certificate->load('program');
+
+        /* ================= HAPUS PDF LAMA ================= */
         if ($certificate->pdf_path && Storage::disk('public')->exists($certificate->pdf_path)) {
             Storage::disk('public')->delete($certificate->pdf_path);
         }
@@ -174,25 +193,29 @@ class CertificateController extends Controller
         $program = Program::findOrFail($request->program_id);
         $template = CertificateTemplate::findOrFail($request->template_id);
 
-        /* ================== GENERATE PDF BARU ================== */
-        $pdf = Pdf::loadView('pdf.certificate ', [
+        /* ================= DECODE LAYOUT ================= */
+        $layout = json_decode($template->layout_json, true);
+
+        /* ================= PATH ABSOLUT ================= */
+        $backgroundPath = storage_path('app/public/' . $template->image_template);
+        $qrAbsolutePath = storage_path('app/public/' . $certificate->qr_code_path);
+
+        /* ================= GENERATE PDF BARU ================= */
+        $pdf = Pdf::loadView('pdf.certificate', [
             'certificate' => $certificate,
             'program' => $program,
             'template' => $template,
-        ])->setPaper('A4', 'landscape');
+            'layout' => $layout,
+            'backgroundPath' => $backgroundPath,
+            'qrPath' => $qrAbsolutePath,
+        ])->setPaper('a4', 'landscape');
 
-        $pdfPath = 'certificates/' . $certificate->certificate_code . '.pdf';
-
+        $pdfPath = "certificates/{$certificate->certificate_code}-" . time() . ".pdf";
         Storage::disk('public')->put($pdfPath, $pdf->output());
 
-
-        /* ================== UPDATE DATABASE ================== */
+        /* ================= SIMPAN PATH PDF ================= */
         $certificate->update([
-            'program_id' => $request->program_id,
-            'template_id' => $request->template_id,
-            'issued_date' => $request->issued_date,
-            'status' => $request->status,
-            'pdf_path' => $pdfPath, // PDF BARU
+            'pdf_path' => $pdfPath,
         ]);
 
         return redirect()
