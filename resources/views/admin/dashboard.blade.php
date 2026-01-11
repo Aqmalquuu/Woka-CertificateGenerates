@@ -19,7 +19,7 @@
                             </div>
                             <div
                                 class="h-50px w-50px d-flex justify-content-center align-items-center bg-info rounded-pill text-white fs-4">
-                                <i class="ri-graduation-cap-line"></i>
+                                <i class="bi bi-mortarboard-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             </div>
                             <div
                                 class="h-50px w-50px d-flex justify-content-center align-items-center bg-secondary rounded-pill text-white fs-4">
-                                <i class="ri-group-line"></i>
+                                <i class="bi bi-file-earmark-check-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div
                                 class="h-50px w-50px d-flex justify-content-center align-items-center bg-success rounded-pill text-white fs-4">
-                                <i class="ri-award-line"></i>
+                                <i class="bi bi-award-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div
                                 class="h-50px w-50px d-flex justify-content-center align-items-center bg-danger rounded-pill text-white fs-4">
-                                <i class="ri-award-line"></i>
+                                <i class="bi bi-award-fill"></i>
                             </div>
                         </div>
                     </div>

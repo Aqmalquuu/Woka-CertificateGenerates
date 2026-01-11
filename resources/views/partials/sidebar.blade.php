@@ -3,9 +3,9 @@
         <!--begin::Brand Image-->
         <a href="/" class="fs-18 fw-semibold">
             <img height="90" class="pe-app-sidebar-logo-default d-none" alt="Logo"
-                src="{{ asset('assets/images/WokaCert1.png') }}">
+                src="{{ asset('assets/images/WokaCertif1.png') }}">
             <img height="90" class="pe-app-sidebar-logo-light d-none" alt="Logo"
-                src="{{ asset('assets/images/WokaCert2.png')}}">
+                src="{{ asset('assets/images/WokaCertif2.png')}}">
             <img height="40" class="pe-app-sidebar-logo-minimize d-none" alt="Logo"
                 src="{{ asset('assets/images/WokaCert.png') }}">
             <img height="40" class="pe-app-sidebar-logo-minimize-light d-none" alt="Logo"
