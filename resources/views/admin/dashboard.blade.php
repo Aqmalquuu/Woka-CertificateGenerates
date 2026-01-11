@@ -1,7 +1,7 @@
 @extends('partials.layouts.master')
 
 @section('title', 'WokaCert | Dashboard Admin')
-@section('title-sub', 'W-Cert')
+@section('title-sub', 'W-Certif')
 @section('pagetitle', 'Dashboard')
 @section('content')
 

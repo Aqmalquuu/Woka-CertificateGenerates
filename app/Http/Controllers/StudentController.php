@@ -106,7 +106,7 @@ class StudentController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $user->password 
+            'password' => $user->password
         ]);
 
         $student->update([
@@ -114,7 +114,23 @@ class StudentController extends Controller
             'asal_sekolah' => $request->asal_sekolah
         ]);
 
-        return redirect()->route('admin.student.index')->with('success', 'Siswa dan akun berhasil diubah');
+        // =================================================
+        // 🔁 REGENERASI PDF UNTUK SEMUA SERTIFIKAT STUDENT
+        // =================================================
+        $certificates = Certificate::where('student_id', $student->id)->get();
+
+        foreach ($certificates as $certificate) {
+            try {
+                $certificate->regeneratePdf();
+            } catch (\Exception $e) {
+                \Log::error(
+                    "Gagal regenerasi PDF sertifikat {$certificate->id} (student {$student->id}): "
+                    . $e->getMessage()
+                );
+            }
+        }
+
+        return redirect()->route('admin.student.index')->with('success', 'Siswa, akun, dan sertifikat berhasil diperbarui');
     }
 
     /**
@@ -135,7 +151,7 @@ class StudentController extends Controller
             $qrPath = str_replace('storage/', '', $certificate->qr_code_path);
             Storage::disk('public')->delete($qrPath);
         }
-        
+
         $student->delete();
         $user->delete();
 

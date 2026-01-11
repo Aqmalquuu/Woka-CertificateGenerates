@@ -1,7 +1,7 @@
 @extends('partials.layouts.master')
 
 @section('title', 'Admin | Manajemen Siswa')
-@section('title-sub', 'W-Cert')
+@section('title-sub', 'W-Certif')
 @section('pagetitle', 'Manajemen Siswa')
 
 @section('content')

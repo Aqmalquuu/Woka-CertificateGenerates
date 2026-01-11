@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Certificate extends Model
 {
@@ -43,5 +45,41 @@ class Certificate extends Model
     public function issued()
     {
         return $this->belongsTo(User::class, 'issued_by');
+    }
+
+    public function regeneratePdf()
+    {
+        // Refresh relasi agar data terbaru
+        $this->load('program', 'template');
+
+        // Hapus PDF lama
+        if ($this->pdf_path && Storage::disk('public')->exists($this->pdf_path)) {
+            Storage::disk('public')->delete($this->pdf_path);
+        }
+
+        $program = $this->program;
+        $template = $this->template;
+
+        if (!$program || !$template) {
+            throw new \Exception("Program atau template tidak ditemukan untuk sertifikat ID: " . $this->id);
+        }
+
+        $layout = json_decode($template->layout_json, true);
+        $backgroundPath = storage_path('app/public/' . $template->image_template);
+        $qrAbsolutePath = storage_path('app/public/' . $this->qr_code_path);
+
+        $pdf = Pdf::loadView('pdf.certificate', [
+            'certificate' => $this,
+            'program' => $program,
+            'template' => $template,
+            'layout' => $layout,
+            'backgroundPath' => $backgroundPath,
+            'qrPath' => $qrAbsolutePath,
+        ])->setPaper('a4', 'landscape');
+
+        $pdfPath = "certificates/{$this->certificate_code}-" . time() . ".pdf";
+        Storage::disk('public')->put($pdfPath, $pdf->output());
+
+        $this->update(['pdf_path' => $pdfPath]);
     }
 }

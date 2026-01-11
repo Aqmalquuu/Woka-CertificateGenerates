@@ -1,7 +1,7 @@
 @extends('partials.layouts.master')
 
 @section('title', 'Admin | Generate Sertifikat')
-@section('title-sub', 'W-Cert')
+@section('title-sub', 'W-Certif')
 @section('pagetitle', 'Generate Sertifikat')
 
 @section('content')

@@ -23,7 +23,9 @@ class DashboardController extends Controller
             $totalSertifikatAktif = Certificate::where('status', 'active')->count();
             $totalSertifikatDicabut = Certificate::where('status', 'revoked')->count();
 
-            $certifikats = Certificate::with('student.user')->paginate(10);
+            $certifikats = Certificate::with('student.user')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
             return view('admin.dashboard', compact([
                 'totalSiswa',
                 'totalProgram',

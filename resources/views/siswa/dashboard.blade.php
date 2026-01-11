@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($certifikats as $no => $sertifikat)
+                        @forelse ($certifikats as $no => $sertifikat)
                             <tr>
                                 <td>{{ $no + 1 }}</td>
                                 <td>{{ $sertifikat->certificate_code }}</td>
@@ -81,7 +81,13 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">
+                                Sertifikat belum tersedia
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -46,16 +46,17 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="dropdown">
-                                                <button class="btn btn-sm" data-bs-toggle="dropdown">
+                                                <button class="btn btn-sm btn-light border-0" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
                                                     <i class="bi bi-three-dots-vertical"></i>
                                                 </button>
 
-                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                    <!-- View -->
+                                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                                    <!-- Preview -->
                                                     <li>
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.certificates.show', $certificate->id) }}">
-                                                            <i class="bi bi-eye"></i> Preview PDF
+                                                            <i class="bi bi-eye me-2"></i> Preview PDF
                                                         </a>
                                                     </li>
 
@@ -104,6 +105,16 @@
             </div>
         </div>
     </div>
+    <style>
+        .table-responsive {
+            overflow: visible !important;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+    </style>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.form-delete').forEach(form => {

@@ -55,7 +55,7 @@
                     // Auto close
                     setTimeout(() => {
                         closeAlert();
-                    }, 3500);
+                    }, 4000);
                 </script>
             @endif
 
@@ -112,7 +112,7 @@
                     // Auto close
                     setTimeout(() => {
                         closeAlert();
-                    }, 3500);
+                    }, 5000);
                 </script>
             @endif
 

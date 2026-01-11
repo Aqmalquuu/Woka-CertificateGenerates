@@ -1,7 +1,7 @@
 @extends('partials.layouts.master')
 
-@section('title', 'Adamin | Tambah Program')
-@section('title-sub', 'W-Cert')
+@section('title', 'Admin | Tambah Program')
+@section('title-sub', 'W-Certif')
 @section('pagetitle', 'Tambah Program')
 
 @section('content')

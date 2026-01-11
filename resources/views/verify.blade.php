@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Certificate Verification | WokaCert</title>
+    <title>Certificate Verification | WokaCertif</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{-- Bootstrap --}}
@@ -119,7 +119,7 @@
             {{-- Footer --}}
             <small class="text-muted">
                 Sertifikat ini diverifikasi secara resmi melalui <br>
-                <strong>Woka Project Mandiri</strong>
+                <strong>Cv. Woka Project Mandiri</strong>
             </small>
         </div>
 

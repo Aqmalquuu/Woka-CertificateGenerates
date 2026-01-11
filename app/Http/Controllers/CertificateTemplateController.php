@@ -37,6 +37,8 @@ class CertificateTemplateController extends Controller
             'layout_json' => 'required'
         ]);
 
+        $layoutJson = json_encode($request->layout, JSON_PRETTY_PRINT);
+
         // Upload gambar template
         $imagePath = $request->file('image_template')
             ->store('certificate/templates', 'public');
@@ -44,7 +46,7 @@ class CertificateTemplateController extends Controller
         CertificateTemplate::create([
             'nama_template' => $request->nama_template,
             'image_template' => $imagePath,
-            'layout_json' => $request->layout_json,
+            'layout_json' => $layoutJson,
         ]);
 
         return redirect()
@@ -61,11 +63,12 @@ class CertificateTemplateController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.x
      */
     public function edit(CertificateTemplate $certificateTemplate)
     {
-        return view('admin.template_sertifikat.edit', compact('certificateTemplate'));
+        $layout = json_decode($certificateTemplate->layout_json, true);
+        return view('admin.template_sertifikat.edit', compact('certificateTemplate', 'layout'));
     }
 
     /**
