@@ -31,7 +31,7 @@
                             <select name="program_id" class="form-select" required>
                                 @foreach ($programs as $program)
                                     <option value="{{ $program->id }}" {{ old('program_id', $certificate->program_id) == $program->id ? 'selected' : '' }}>
-                                        {{ $program->nama_program }}
+                                        {{ $program->nama_program }} - {{ $program->jenis }}
                                     </option>
                                 @endforeach
                             </select>

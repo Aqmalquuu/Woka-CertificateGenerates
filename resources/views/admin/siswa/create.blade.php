@@ -83,9 +83,9 @@
                     </div>
 
                     {{-- Button --}}
-                    <div class="d-flex justify-content-between">
+                    <div class="card-footer text-end">
                         <a href="{{ route('admin.student.index') }}" class="btn btn-light">
-                            <i class="bi bi-arrow-left me-1"></i> Kembali
+                            Batal
                         </a>
 
                         <button type="submit" class="btn btn-primary">

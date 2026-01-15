@@ -153,7 +153,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                <a href="" class="btn btn-sm btn-outline-secondary me-1 px-3">
+                                                <a href="{{ route('admin.certificates.show', $sertifikat->id) }}" class="btn btn-sm btn-outline-secondary me-1 px-3">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                             </td>

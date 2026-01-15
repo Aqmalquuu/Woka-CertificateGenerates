@@ -17,29 +17,31 @@
 
           <div class="card-body">
 
-            {{-- NAMA TEMPLATE --}}
             <div class="mb-4">
               <label class="form-label fw-semibold mb-1">Nama Template</label>
-              <input type="text" name="nama_template" class="form-control" required>
+              <input type="text" name="nama_template" class="form-control  @error('nama_template') is-invalid @enderror" required>
+              @error('nama_template')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
 
-            {{-- BACKGROUND --}}
             <div class="mb-4">
               <label class="form-label fw-semibold mb-1">Background Sertifikat</label>
-              {{-- PREVIEW --}}
               <div class="mt-3">
                 <img id="backgroundPreview" src="" alt="Preview Background" class="img-fluid d-none"
                   style="max-height: 200px;">
               </div>
-              <input type="file" name="image_template" class="form-control" accept="image/*" required
+              <input type="file" name="image_template" class="form-control @error('image_template') is-invalid @enderror" accept="image/*" required
                 onchange="previewBackground(event)">
+              @error('image_template')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
 
             {{-- ================= LAYOUT ================= --}}
             <div class="mb-2">
-              <label class="form-label fw-bold mb-2">Layout Sertifikat</label>
+              <label class="form-label fw-bold mb-2">Layouts Sertifikat</label>
 
-              {{-- ================= STUDENT NAME ================= --}}
               <fieldset class="border rounded p-3 mb-3">
                 <legend class="float-none w-auto px-2 fs-6 fw-semibold text-muted">
                   Nama Siswa
@@ -48,19 +50,19 @@
                 <div class="row g-3">
                   <div class="col-md-3">
                     <label class="form-label small">Top</label>
-                    <input type="text" class="form-control" name="layout[student_name][top]">
+                    <input type="text" class="form-control" name="layout_json[student_name][top]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Left</label>
-                    <input type="text" class="form-control" name="layout[student_name][left]">
+                    <input type="text" class="form-control" name="layout_json[student_name][left]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Font Size</label>
-                    <input type="text" class="form-control" name="layout[student_name][font_size]">
+                    <input type="text" class="form-control" name="layout_json[student_name][font_size]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Font Family</label>
-                    <select class="form-select" name="layout[student_name][font_family]">
+                    <select class="form-select" name="layout_json[student_name][font_family]" required>
                       <option value="">-- Pilih Font --</option>
                       <option value="Times New Roman">Times New Roman</option>
                       <option value="Georgia">Georgia</option>
@@ -75,7 +77,7 @@
 
                   <div class="col-md-3">
                     <label class="form-label small">Font Weight</label>
-                    <select class="form-select" name="layout[student_name][font_weight]">
+                    <select class="form-select" name="layout_json[student_name][font_weight]" required>
                       <option value="normal" selected>Normal</option>
                       <option value="bold">Bold</option>
                     </select>
@@ -92,23 +94,23 @@
                 <div class="row g-3">
                   <div class="col-md-3">
                     <label class="form-label small">Top</label>
-                    <input type="text" class="form-control" name="layout[supporting_text][top]">
+                    <input type="text" class="form-control" name="layout_json[supporting_text][top]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Left</label>
-                    <input type="text" class="form-control" name="layout[supporting_text][left]">
+                    <input type="text" class="form-control" name="layout_json[supporting_text][left]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Width</label>
-                    <input type="text" class="form-control" name="layout[supporting_text][width]">
+                    <input type="text" class="form-control" name="layout_json[supporting_text][width]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Font Size</label>
-                    <input type="text" class="form-control" name="layout[supporting_text][font_size]">
+                    <input type="text" class="form-control" name="layout_json[supporting_text][font_size]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Text Align</label>
-                    <select class="form-select" name="layout[supporting_text][text_align]">
+                    <select class="form-select" name="layout_json[supporting_text][text_align]" required>
                       <option value="left" selected>Left</option>
                       <option value="center">Center</option>
                       <option value="right">Right</option>
@@ -116,7 +118,7 @@
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Line Height</label>
-                    <input type="text" class="form-control" name="layout[supporting_text][line_height]">
+                    <input type="text" class="form-control" name="layout_json[supporting_text][line_height]" required>
                   </div>
                 </div>
               </fieldset>
@@ -130,19 +132,19 @@
                 <div class="row g-3">
                   <div class="col-md-3">
                     <label class="form-label small">Top</label>
-                    <input type="text" class="form-control" name="layout[program][top]">
+                    <input type="text" class="form-control" name="layout_json[program][top]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Left</label>
-                    <input type="text" class="form-control" name="layout[program][left]">
+                    <input type="text" class="form-control" name="layout_json[program][left]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Font Size</label>
-                    <input type="text" class="form-control" name="layout[program][font_size]">
+                    <input type="text" class="form-control" name="layout_json[program][font_size]" required>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label small">Font Weight</label>
-                    <select class="form-select" name="layout[program][font_weight]">
+                    <select class="form-select" name="layout_json[program][font_weight]" required>
                       <option value="normal">Normal</option>
                       <option value="bold" selected>Bold</option>
                     </select>
@@ -159,15 +161,15 @@
                 <div class="row g-3">
                   <div class="col-md-4">
                     <label class="form-label small">Top</label>
-                    <input type="text" class="form-control" name="layout[date][top]">
+                    <input type="text" class="form-control" name="layout_json[date][top]" required>
                   </div>
                   <div class="col-md-4">
                     <label class="form-label small">Left</label>
-                    <input type="text" class="form-control" name="layout[date][left]">
+                    <input type="text" class="form-control" name="layout_json[date][left]" required>
                   </div>
                   <div class="col-md-4">
                     <label class="form-label small">Font Size</label>
-                    <input type="text" class="form-control" name="layout[date][font_size]">
+                    <input type="text" class="form-control" name="layout_json[date][font_size]" required>
                   </div>
                 </div>
               </fieldset>
@@ -181,15 +183,15 @@
                 <div class="row g-3">
                   <div class="col-md-4">
                     <label class="form-label small">Top</label>
-                    <input type="text" class="form-control" name="layout[certificate_number][top]">
+                    <input type="text" class="form-control" name="layout_json[certificate_number][top]" required>
                   </div>
                   <div class="col-md-4">
                     <label class="form-label small">Left</label>
-                    <input type="text" class="form-control" name="layout[certificate_number][left]">
+                    <input type="text" class="form-control" name="layout_json[certificate_number][left]" required>
                   </div>
                   <div class="col-md-4">
                     <label class="form-label small">Font Size</label>
-                    <input type="text" class="form-control" name="layout[certificate_number][font_size]"
+                    <input type="text" class="form-control" name="layout_json[certificate_number][font_size]" required
                      >
                   </div>
                 </div>
@@ -204,15 +206,15 @@
                 <div class="row g-3">
                   <div class="col-md-4">
                     <label class="form-label small">Top</label>
-                    <input type="text" class="form-control" name="layout[qr][top]">
+                    <input type="text" class="form-control" name="layout_json[qr][top]" required>
                   </div>
                   <div class="col-md-4">
                     <label class="form-label small">Left</label>
-                    <input type="text" class="form-control" name="layout[qr][left]">
+                    <input type="text" class="form-control" name="layout_json[qr][left]" required>
                   </div>
                   <div class="col-md-4">
                     <label class="form-label small">Size</label>
-                    <input type="text" class="form-control" name="layout[qr][size]">
+                    <input type="text" class="form-control" name="layout_json[qr][size]" required>
                   </div>
                 </div>
               </fieldset>

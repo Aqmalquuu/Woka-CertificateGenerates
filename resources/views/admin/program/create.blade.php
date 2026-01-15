@@ -16,7 +16,6 @@
                 <form action="{{ route('admin.program.store') }}" method="POST">
                     @csrf
 
-                    {{-- Nama --}}
                     <div class="mb-3">
                         <label class="form-label">Nama Program</label>
                         <input type="text"
@@ -55,10 +54,9 @@
                         @enderror
                     </div>
 
-                    {{-- Button --}}
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ route('admin.student.index') }}" class="btn btn-light">
-                            <i class="bi bi-arrow-left me-1"></i> Kembali
+                    <div class="card-footer text-end">
+                        <a href="{{ route('admin.program.index') }}" class="btn btn-light">
+                            Batal
                         </a>
 
                         <button type="submit" class="btn btn-primary">

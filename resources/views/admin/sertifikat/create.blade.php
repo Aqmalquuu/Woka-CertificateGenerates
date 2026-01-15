@@ -35,7 +35,7 @@
                                 <option value="">-- Pilih Program --</option>
                                 @foreach ($programs as $program)
                                     <option value="{{ $program->id }}">
-                                        {{ $program->nama_program }}
+                                        {{ $program->nama_program }} - {{ $program->jenis }}
                                     </option>
                                 @endforeach
                             </select>
@@ -64,7 +64,7 @@
                     <div class="card-footer text-end">
                         <a href="{{ route('admin.certificates.index') }}" class="btn btn-light">Batal</a>
                         <button class="btn btn-primary">
-                            <i class="bi bi-award me-1"></i> Generate
+                            <i class="bi bi-save me-1"></i> Buat
                         </button>
                     </div>
                 </form>

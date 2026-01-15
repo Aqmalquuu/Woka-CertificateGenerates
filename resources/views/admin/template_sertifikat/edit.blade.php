@@ -337,7 +337,7 @@
                 Batal
             </a>
             <button class="btn btn-primary">
-                <i class="bi bi-save me-1"></i> Update
+                <i class="bi bi-arrow-repeat me-1"></i> Update
             </button>
         </div>
 
